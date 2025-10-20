@@ -672,22 +672,6 @@ wheels = [
 ]
 
 [[package]]
-name = "inline-snapshot"
-version = "0.30.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "asttokens" },
-    { name = "executing" },
-    { name = "pytest" },
-    { name = "rich" },
-    { name = "tomli", marker = "python_full_version < '3.11'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4c/3a/7e4123d2bee5f411aca373a4c5e5a33db6bebae8ae016635c0a2c67f2ed2/inline_snapshot-0.30.0.tar.gz", hash = "sha256:486e996ef133d4d91bacf78c8b712f76668709e7ffde6d9d925148d36c7c8fbd", size = 2598970, upload-time = "2025-10-15T06:01:33.784Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/81/28/9fb09b1872d3628768ab1408e2afa03ba0051dcdd13db88ac154cc1c2171/inline_snapshot-0.30.0-py3-none-any.whl", hash = "sha256:1d790c4c3469d5de52fc2f02a53ab070ebb346798012de1340dea9091f21028c", size = 71258, upload-time = "2025-10-15T06:01:31.648Z" },
-]
-
-[[package]]
 name = "ipykernel"
 version = "6.30.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2295,7 +2279,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "coverage" },
-    { name = "inline-snapshot" },
     { name = "jupyterlab" },
     { name = "pre-commit" },
     { name = "pytest" },
@@ -2319,7 +2302,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "coverage", specifier = ">=7.8.0" },
-    { name = "inline-snapshot", specifier = ">=0.30.0" },
     { name = "jupyterlab", specifier = ">=4.4.2" },
     { name = "pre-commit", specifier = ">=4.2.0" },
     { name = "pytest", specifier = ">=8.3.5" },
