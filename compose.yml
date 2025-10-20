@@ -1,6 +1,6 @@
 services:
-  template-python:
-    container_name: template-python
+  template-mcp-python:
+    container_name: template-mcp-python
     build:
       context: .
       dockerfile: Dockerfile
