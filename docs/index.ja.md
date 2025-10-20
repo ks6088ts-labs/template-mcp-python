@@ -1,3 +1,3 @@
-# template-python
+# template-mcp-python
 
 このリポジトリは、Python プロジェクトのためのテンプレートリポジトリです。
