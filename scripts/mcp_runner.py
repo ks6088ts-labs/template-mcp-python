@@ -5,13 +5,14 @@ import typer
 from dotenv import load_dotenv
 
 from template_mcp_python.loggers import get_logger
+from template_mcp_python.mcp_servers.image_analyzer import mcp as image_analyzer_mcp
 from template_mcp_python.mcp_servers.image_transfer import mcp as image_transfer_mcp
 from template_mcp_python.mcp_servers.quick_example import mcp as quick_example_mcp
 from template_mcp_python.settings import Settings
 
 app = typer.Typer(
     add_completion=False,
-    help="template-mcp-python CLI",
+    help="MCP Runner CLI",
 )
 
 logger = get_logger(__name__)
@@ -57,6 +58,17 @@ def image_transfer(
 ):
     set_verbose_logging(verbose)
     image_transfer_mcp.run()
+
+
+@app.command()
+def image_analyzer(
+    verbose: Annotated[
+        bool,
+        typer.Option("--verbose", "-v", help="Enable verbose output"),
+    ] = False,
+):
+    set_verbose_logging(verbose)
+    image_analyzer_mcp.run()
 
 
 if __name__ == "__main__":
