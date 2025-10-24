@@ -5,7 +5,8 @@ import typer
 from dotenv import load_dotenv
 
 from template_mcp_python.loggers import get_logger
-from template_mcp_python.mcp_servers.quick_example import mcp
+from template_mcp_python.mcp_servers.image_transfer import mcp as image_transfer_mcp
+from template_mcp_python.mcp_servers.quick_example import mcp as quick_example_mcp
 from template_mcp_python.settings import Settings
 
 app = typer.Typer(
@@ -44,7 +45,18 @@ def quick_example(
     logger.debug(f"This is a debug message with name: {name}")
     logger.info(f"Settings from .env: {Settings().model_dump_json(indent=2)}")
 
-    mcp.run()
+    quick_example_mcp.run()
+
+
+@app.command()
+def image_transfer(
+    verbose: Annotated[
+        bool,
+        typer.Option("--verbose", "-v", help="Enable verbose output"),
+    ] = False,
+):
+    set_verbose_logging(verbose)
+    image_transfer_mcp.run()
 
 
 if __name__ == "__main__":
