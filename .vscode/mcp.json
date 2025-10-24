@@ -14,8 +14,18 @@
       "args": [
         "run",
         "python",
-        "scripts/template.py",
+        "scripts/mcp_runner.py",
         "image-transfer",
+        "--verbose"
+      ]
+    },
+    "image-analyzer": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "scripts/mcp_runner.py",
+        "image-analyzer",
         "--verbose"
       ]
     },
