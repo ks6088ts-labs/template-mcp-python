@@ -107,3 +107,11 @@ docs-serve: ## serve documentation
 
 .PHONY: ci-test-docs
 ci-test-docs: install-deps-docs docs ## run CI test for documentation
+
+# ---
+# Project
+# ---
+
+.PHONY: mcp-inspector
+mcp-inspector: ## run MCP Inspector
+	npx @modelcontextprotocol/inspector

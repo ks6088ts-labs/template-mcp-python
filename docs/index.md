@@ -17,3 +17,9 @@ uv run mcp dev template_mcp_python/mcp_servers/quick_example.py
 ```shell
 uv run pytest --capture=no -vv
 ```
+
+- [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
+
+```shell
+npx @modelcontextprotocol/inspector
+```

@@ -5,6 +5,7 @@ import typer
 from dotenv import load_dotenv
 
 from template_mcp_python.loggers import get_logger
+from template_mcp_python.mcp_servers.quick_example import mcp
 from template_mcp_python.settings import Settings
 
 app = typer.Typer(
@@ -24,7 +25,7 @@ def set_verbose_logging(
 
 
 @app.command()
-def hello(
+def quick_example(
     name: Annotated[
         str,
         typer.Option(
@@ -42,6 +43,8 @@ def hello(
 
     logger.debug(f"This is a debug message with name: {name}")
     logger.info(f"Settings from .env: {Settings().model_dump_json(indent=2)}")
+
+    mcp.run()
 
 
 if __name__ == "__main__":
