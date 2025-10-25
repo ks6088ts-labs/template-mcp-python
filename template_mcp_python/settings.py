@@ -14,6 +14,7 @@ class Settings(BaseSettings):
 
 class ImageTransferSettings(BaseSettings):
     image_transfer_image_path: str = "data/windows-kitchen.jpg"
+    image_transfer_sqlite_db_path: str = "data/images.db"
 
     model_config = SettingsConfigDict(
         env_file=".env",
