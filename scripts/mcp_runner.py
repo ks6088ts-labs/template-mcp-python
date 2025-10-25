@@ -26,7 +26,9 @@ def set_verbose_logging(
         logger.setLevel(logging.DEBUG)
 
 
-@app.command()
+@app.command(
+    help="Run a quick example MCP server",
+)
 def quick_example(
     name: Annotated[
         str,
@@ -49,7 +51,9 @@ def quick_example(
     quick_example_mcp.run()
 
 
-@app.command()
+@app.command(
+    help="Run the Image Transfer MCP server",
+)
 def image_transfer(
     verbose: Annotated[
         bool,
@@ -60,7 +64,9 @@ def image_transfer(
     image_transfer_mcp.run()
 
 
-@app.command()
+@app.command(
+    help="Run the Image Analyzer MCP server",
+)
 def image_analyzer(
     verbose: Annotated[
         bool,
