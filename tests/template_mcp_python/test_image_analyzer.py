@@ -50,7 +50,7 @@ def image_analyzer_setup(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
 
     stub_result = SceneResolverResult(caption="stub caption", confidence=0.87)
     stub_model = StubSceneResolver(result=stub_result)
-    module.model = stub_model
+    module.model = stub_model  # type: ignore
 
     try:
         yield module, base64_image, stub_model, stub_result
