@@ -20,15 +20,6 @@ model: SceneResolverBaseModel = AzureOpenAiSceneResolver()
 
 
 @mcp.tool()
-def analyze(base64_encoded_str: str) -> str:
-    """Analyze an image and return as JSON string."""
-    logger.info("Analyzing image...")
-    result: SceneResolverResult = model.solve(base64_encoded_str)
-    logger.info("Image analysis complete.")
-    return result.model_dump_json(indent=2)
-
-
-@mcp.tool()
 def analyze_repository_image(image_id: str) -> str:
     """Read an image from the repository and return its analysis as JSON."""
     logger.info("Retrieving image %s from repository...", image_id)
