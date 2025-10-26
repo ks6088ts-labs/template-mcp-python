@@ -1165,6 +1165,20 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-mcp-adapters"
+version = "0.1.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "mcp" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ac/4e/b84af2e379edfb51db78edcfc6eab7dca798f2ce9d74b73e29f5f207685c/langchain_mcp_adapters-0.1.11.tar.gz", hash = "sha256:a217c49086b162344749f7f99a148fc12482e2da8e0260b2e35fc93afb31b38d", size = 23061, upload-time = "2025-10-03T14:53:13.98Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1e/cc/5f9b23cce308b2c30246e31712bf1a53ae49d97bab8b3d9bc9cfe364f82c/langchain_mcp_adapters-0.1.11-py3-none-any.whl", hash = "sha256:7b35921e9487bcb3ea3d94bf10341316ac897e2997e8a16032ae514834a9685d", size = 15751, upload-time = "2025-10-03T14:53:12.358Z" },
+]
+
+[[package]]
 name = "langchain-openai"
 version = "1.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1392,7 +1406,8 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-multipart" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
-    { name = "sse-starlette" },
+    { name = "sse-starlette", version = "2.1.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "sse-starlette", version = "3.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "starlette" },
     { name = "uvicorn", marker = "sys_platform != 'emscripten'" },
 ]
@@ -2745,10 +2760,31 @@ wheels = [
 
 [[package]]
 name = "sse-starlette"
+version = "2.1.3"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.14'",
+    "python_full_version >= '3.11' and python_full_version < '3.14'",
+]
+dependencies = [
+    { name = "anyio", marker = "python_full_version >= '3.11'" },
+    { name = "starlette", marker = "python_full_version >= '3.11'" },
+    { name = "uvicorn", marker = "python_full_version >= '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/72/fc/56ab9f116b2133521f532fce8d03194cf04dcac25f583cf3d839be4c0496/sse_starlette-2.1.3.tar.gz", hash = "sha256:9cd27eb35319e1414e3d2558ee7414487f9529ce3b3cf9b21434fd110e017169", size = 19678, upload-time = "2024-08-01T08:52:50.248Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/52/aa/36b271bc4fa1d2796311ee7c7283a3a1c348bad426d37293609ca4300eef/sse_starlette-2.1.3-py3-none-any.whl", hash = "sha256:8ec846438b4665b9e8c560fcdea6bc8081a3abf7942faa95e5a744999d219772", size = 9383, upload-time = "2024-08-01T08:52:48.659Z" },
+]
+
+[[package]]
+name = "sse-starlette"
 version = "3.0.2"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version < '3.11'",
+]
 dependencies = [
-    { name = "anyio" },
+    { name = "anyio", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/6f/22ed6e33f8a9e76ca0a412405f31abb844b779d52c5f96660766edcd737c/sse_starlette-3.0.2.tar.gz", hash = "sha256:ccd60b5765ebb3584d0de2d7a6e4f745672581de4f5005ab31c3a25d10b52b3a", size = 20985, upload-time = "2025-07-27T09:07:44.565Z" }
 wheels = [
@@ -2788,6 +2824,7 @@ version = "0.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "langchain", extra = ["openai"] },
+    { name = "langchain-mcp-adapters" },
     { name = "mcp" },
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
@@ -2812,6 +2849,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "langchain", extras = ["openai"], specifier = ">=1.0.2" },
+    { name = "langchain-mcp-adapters", specifier = ">=0.1.11" },
     { name = "mcp", specifier = ">=1.18.0" },
     { name = "pydantic-settings", specifier = ">=2.9.1" },
     { name = "python-dotenv", specifier = ">=1.1.0" },

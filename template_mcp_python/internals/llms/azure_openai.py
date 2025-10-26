@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
 
 class AzureOpenAiWrapper:
-    def __init__(self, settings: Settings = None):
+    def __init__(self, settings: Settings | None = None):
         self.settings = settings or Settings()
 
     @property
