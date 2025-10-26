@@ -21,13 +21,6 @@ logger.info("Image loaded and encoded to base64")
 
 
 @mcp.tool()
-def image() -> str:
-    """Transfer an image and return its base64-encoded string."""
-    logger.info("Transferring image as base64-encoded string.")
-    return image_data_base64
-
-
-@mcp.tool()
 def store_image() -> str:
     """Persist the base64-encoded image in a SQLite database and return its identifier."""
     logger.info("Persisting image to SQLite database.")

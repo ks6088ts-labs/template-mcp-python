@@ -66,25 +66,6 @@ async def client_session(image_analyzer_setup) -> AsyncGenerator[ClientSession, 
 
 
 @pytest.mark.anyio
-async def test_analyze_tool_returns_model_result(
-    client_session: ClientSession,
-    image_analyzer_setup,
-):
-    _, base64_image, stub_model, stub_result = image_analyzer_setup
-
-    result: CallToolResult = await client_session.call_tool(
-        "analyze",
-        {"base64_encoded_str": base64_image},
-    )
-
-    assert result.isError is False
-    assert result.structuredContent is not None, "Expected structuredContent in result"
-    payload = result.structuredContent["result"]
-    assert json.loads(payload) == stub_result.model_dump()
-    assert stub_model.calls == [base64_image]
-
-
-@pytest.mark.anyio
 async def test_analyze_repository_image_reads_and_analyzes(
     client_session: ClientSession,
     image_analyzer_setup,
