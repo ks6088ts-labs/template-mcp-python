@@ -1,32 +1,10 @@
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_openai import AzureChatOpenAI
-from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from template_mcp_python.internals.llms.azure_openai import AzureOpenAiWrapper
 from template_mcp_python.internals.scene_resolvers.base_model import SceneResolverBaseModel
 from template_mcp_python.internals.scene_resolvers.results import SceneResolverResult
 
-
-class Settings(BaseSettings):
-    scene_resolver_azure_openai_endpoint: str = "https://<YOUR_AOAI_NAME>.openai.azure.com/"
-    scene_resolver_azure_openai_api_key: str = "<YOUR_API_KEY>"
-    scene_resolver_azure_openai_api_version: str = "2025-04-01-preview"
-    scene_resolver_azure_openai_model_chat: str = "gpt-5"
-    scene_resolver_azure_openai_model_embedding: str = "text-embedding-3-small"
-
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_ignore_empty=True,
-        extra="ignore",
-    )
-
-
-settings = Settings()
-llm = AzureChatOpenAI(
-    api_key=settings.scene_resolver_azure_openai_api_key,
-    azure_endpoint=settings.scene_resolver_azure_openai_endpoint,
-    api_version=settings.scene_resolver_azure_openai_api_version,
-    azure_deployment=settings.scene_resolver_azure_openai_model_chat,
-).with_structured_output(SceneResolverResult)
+llm = AzureOpenAiWrapper().llm.with_structured_output(SceneResolverResult)
 
 
 class AzureOpenAiSceneResolver(SceneResolverBaseModel):

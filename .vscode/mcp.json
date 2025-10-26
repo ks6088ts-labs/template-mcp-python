@@ -1,13 +1,9 @@
 {
   "servers": {
-    // Playwright MCP server: https://github.com/microsoft/playwright-mcp
     "playwright": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@playwright/mcp@latest",
-        "--vision"
-      ]
+      "args": ["-y", "@playwright/mcp@latest", "--caps=vision"],
+      "transport": "stdio"
     },
     "image-transfer": {
       "command": "uv",
@@ -17,7 +13,8 @@
         "scripts/mcp_runner.py",
         "image-transfer",
         "--verbose"
-      ]
+      ],
+      "transport": "stdio"
     },
     "image-analyzer": {
       "command": "uv",
@@ -27,7 +24,8 @@
         "scripts/mcp_runner.py",
         "image-analyzer",
         "--verbose"
-      ]
-    },
+      ],
+      "transport": "stdio"
+    }
   }
 }

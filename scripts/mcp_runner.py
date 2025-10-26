@@ -1,9 +1,13 @@
+import asyncio
 import logging
 from typing import Annotated
 
 import typer
 from dotenv import load_dotenv
+from langchain_core.messages import BaseMessage
+from langchain_core.runnables.config import RunnableConfig
 
+from template_mcp_python.internals.agents.multi_server_mcp import make_graph
 from template_mcp_python.loggers import get_logger
 from template_mcp_python.mcp_servers.image_analyzer import mcp as image_analyzer_mcp
 from template_mcp_python.mcp_servers.image_transfer import mcp as image_transfer_mcp
@@ -75,6 +79,62 @@ def image_analyzer(
 ):
     set_verbose_logging(verbose)
     image_analyzer_mcp.run()
+
+
+@app.command(
+    help="Run the multi-server MCP agent",
+)
+def multi_server_mcp(
+    prompt: Annotated[
+        str,
+        typer.Option(
+            "--prompt",
+            "-p",
+            help="Prompt to send to the agent",
+        ),
+    ] = "Yahoo ニュースの最新記事を教えて",
+    recursion_limit: int = typer.Option(
+        10,
+        "--recursion-limit",
+        "-r",
+        help="Recursion limit for the agent",
+    ),
+    verbose: Annotated[
+        bool,
+        typer.Option("--verbose", "-v", help="Enable verbose output"),
+    ] = False,
+):
+    set_verbose_logging(verbose)
+
+    logger.info("Creating agent graph")
+    graph = asyncio.run(make_graph())
+
+    logger.info("Invoking agent with prompt")
+    response = asyncio.run(
+        graph.ainvoke(
+            input={
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    }
+                ],
+            },
+            config=RunnableConfig(
+                recursion_limit=recursion_limit,
+                callbacks=[
+                    # You can add custom callbacks here
+                ],
+            ),
+        )
+    )
+    logger.info(f"response: {response}")
+
+    try:
+        message: BaseMessage = response["messages"][-1]
+        print(f"Agent response: {message.content}")
+    except Exception as e:
+        print(f"Failed to parse agent response: {e}")
 
 
 if __name__ == "__main__":
