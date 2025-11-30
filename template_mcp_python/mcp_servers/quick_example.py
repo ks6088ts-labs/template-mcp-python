@@ -1,6 +1,15 @@
+import os
+
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("Quick Example Server")
+load_dotenv(override=True)
+
+mcp = FastMCP(
+    name="Quick Example Server",
+    host=os.getenv("MCP_HOST", "0.0.0.0"),
+    port=os.getenv("MCP_PORT", 8000),
+)
 
 
 @mcp.tool()
