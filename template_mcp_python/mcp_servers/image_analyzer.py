@@ -1,5 +1,6 @@
 import os
 
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
 from template_mcp_python.internals.repositories.sqlite_repository import SqliteRepository
@@ -10,9 +11,15 @@ from template_mcp_python.internals.scene_resolvers.results import SceneResolverR
 from template_mcp_python.loggers import get_logger
 from template_mcp_python.settings import ImageTransferSettings as Settings
 
+load_dotenv(override=True)
+
 logger = get_logger(__name__)
 logger.setLevel("INFO")
-mcp = FastMCP("Image Analyzer Server")
+mcp = FastMCP(
+    name="Image Analyzer Server",
+    host=os.getenv("MCP_HOST", "0.0.0.0"),
+    port=os.getenv("MCP_PORT", 8000),
+)
 settings = Settings()
 db_path = os.getenv("IMAGE_TRANSFER_DB_PATH", settings.image_transfer_sqlite_db_path)
 repository = SqliteRepository(db_path)
