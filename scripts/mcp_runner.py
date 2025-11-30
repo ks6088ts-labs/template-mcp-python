@@ -138,8 +138,11 @@ def multi_server_mcp(
 
 
 if __name__ == "__main__":
-    assert load_dotenv(
+    result = load_dotenv(
         override=True,
         verbose=True,
-    ), "Failed to load environment variables"
+    )
+    if not result:
+        logger.warning("Failed to load .env file")
+        # pass through even if .env loading fails
     app()

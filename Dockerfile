@@ -26,4 +26,7 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Copy application code after dependencies are installed
 COPY . .
 
+# Install the local package
+RUN pip install --no-cache-dir .
+
 CMD ["python", "-m", "template_mcp_python.core"]
