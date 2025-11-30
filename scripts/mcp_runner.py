@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Annotated
+from typing import Annotated, Literal
 
 import typer
 from dotenv import load_dotenv
@@ -42,6 +42,14 @@ def quick_example(
             help="Name of the person to greet",
         ),
     ] = "World",
+    transport: Annotated[
+        Literal["stdio", "sse", "streamable-http"],
+        typer.Option(
+            "--transport",
+            "-t",
+            help="Transport method for the MCP server",
+        ),
+    ] = "stdio",
     verbose: Annotated[
         bool,
         typer.Option("--verbose", "-v", help="Enable verbose output"),
@@ -52,33 +60,55 @@ def quick_example(
     logger.debug(f"This is a debug message with name: {name}")
     logger.info(f"Settings from .env: {Settings().model_dump_json(indent=2)}")
 
-    quick_example_mcp.run()
+    quick_example_mcp.run(
+        transport=transport,
+    )
 
 
 @app.command(
     help="Run the Image Transfer MCP server",
 )
 def image_transfer(
+    transport: Annotated[
+        Literal["stdio", "sse", "streamable-http"],
+        typer.Option(
+            "--transport",
+            "-t",
+            help="Transport method for the MCP server",
+        ),
+    ] = "stdio",
     verbose: Annotated[
         bool,
         typer.Option("--verbose", "-v", help="Enable verbose output"),
     ] = False,
 ):
     set_verbose_logging(verbose)
-    image_transfer_mcp.run()
+    image_transfer_mcp.run(
+        transport=transport,
+    )
 
 
 @app.command(
     help="Run the Image Analyzer MCP server",
 )
 def image_analyzer(
+    transport: Annotated[
+        Literal["stdio", "sse", "streamable-http"],
+        typer.Option(
+            "--transport",
+            "-t",
+            help="Transport method for the MCP server",
+        ),
+    ] = "stdio",
     verbose: Annotated[
         bool,
         typer.Option("--verbose", "-v", help="Enable verbose output"),
     ] = False,
 ):
     set_verbose_logging(verbose)
-    image_analyzer_mcp.run()
+    image_analyzer_mcp.run(
+        transport=transport,
+    )
 
 
 @app.command(
