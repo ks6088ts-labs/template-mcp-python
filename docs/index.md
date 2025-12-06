@@ -35,3 +35,7 @@ uv run python scripts/mcp_runner.py multi-server-mcp \
 uv run python scripts/mcp_runner.py multi-server-mcp \
     --prompt "Playwright-MCPを使って、はてなブックマークのテクノロジーカテゴリの人気エントリのタイトルを5つ取得して表示して"
 ```
+
+## FastMCP
+
+- [Welcome to FastMCP 2.0!](https://gofastmcp.com/getting-started/welcome)
