@@ -1,9 +1,11 @@
 import cv2
+from cv2.typing import Scalar
 
 
 class ImageProcessor:
     def __init__(self, image_path: str):
         self.image_path = image_path
+        self.image: cv2.typing.MatLike | None = None
 
     def read_image(self) -> None:
         try:
@@ -16,9 +18,11 @@ class ImageProcessor:
     def overlay_grid(
         self,
         interval: int = 50,
-        bgr_color: tuple = (0, 0, 255),  # BGR format
+        bgr_color: Scalar = (0, 0, 255),  # BGR format
         enable_ticks: bool = True,
     ) -> None:
+        if self.image is None:
+            raise RuntimeError("Image not loaded. Call read_image() first.")
         height, width = self.image.shape[:2]
         for x in range(0, width, interval):
             cv2.line(self.image, (x, 0), (x, height), color=bgr_color, thickness=1)
@@ -47,6 +51,8 @@ class ImageProcessor:
                 )
 
     def save_image(self, output_path: str) -> None:
+        if self.image is None:
+            raise RuntimeError("Image not loaded. Call read_image() first.")
         try:
             cv2.imwrite(output_path, self.image)
         except Exception as e:

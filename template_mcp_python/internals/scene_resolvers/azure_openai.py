@@ -9,7 +9,7 @@ from template_mcp_python.internals.scene_resolvers.results import SceneResolverR
 class AzureOpenAiSceneResolver(SceneResolverBaseModel):
     def __init__(
         self,
-        model: BaseModel = SceneResolverResult,
+        model: type[BaseModel] = SceneResolverResult,
         system_prompt: str = "You are a helpful assistant that performs image analysis tasks. You will be provided with an image in base64 format. Analyze the image and provide the required information based on the user's request.",  # noqa: E501
         human_prompt: str = "Analyze the following image and provide the required information.",
     ):

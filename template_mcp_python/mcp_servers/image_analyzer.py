@@ -7,7 +7,6 @@ from template_mcp_python.internals.repositories.sqlite_repository import SqliteR
 from template_mcp_python.internals.repositories.types import ReadImageRequest, ResultStatus
 from template_mcp_python.internals.scene_resolvers.azure_openai import AzureOpenAiSceneResolver
 from template_mcp_python.internals.scene_resolvers.base_model import SceneResolverBaseModel
-from template_mcp_python.internals.scene_resolvers.results import SceneResolverResult
 from template_mcp_python.loggers import get_logger
 from template_mcp_python.settings import ImageTransferSettings as Settings
 
@@ -37,6 +36,6 @@ def analyze_repository_image(image_id: str) -> str:
         raise RuntimeError(f"Failed to retrieve image with id {image_id}.")
 
     logger.info("Image retrieved; analyzing.")
-    result: SceneResolverResult = model.solve(response.base64_image)
+    result = model.solve(response.base64_image)
     logger.info("Image analysis complete for id %s.", image_id)
     return result.model_dump_json(indent=2)
