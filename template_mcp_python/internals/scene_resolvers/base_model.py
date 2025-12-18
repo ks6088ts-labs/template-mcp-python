@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from template_mcp_python.internals.scene_resolvers.results import SceneResolverResult
+from pydantic import BaseModel
 
 
 class SceneResolverBaseModel(ABC):
@@ -8,5 +8,5 @@ class SceneResolverBaseModel(ABC):
     def solve(
         self,
         base64_image: str,
-    ) -> SceneResolverResult:
+    ) -> BaseModel:
         raise NotImplementedError
