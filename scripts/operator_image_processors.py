@@ -9,7 +9,7 @@ from template_mcp_python.loggers import get_logger
 
 app = typer.Typer(
     add_completion=False,
-    help="Image Processor Operator CLI",
+    help="Image Processors Operator CLI",
 )
 
 logger = get_logger(__name__)
